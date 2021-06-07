@@ -1,13 +1,13 @@
 import Vue from 'vue'
-import './plugins/axios'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import axios from './plugins/axios'
+import './plugins/elementui'
 import App from './App.vue'
-import router from './router'
+import router from './router/router'
 import store from './store'
 import './assets/global.css'
 
-Vue.use(ElementUI)
+
+Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 new Vue({

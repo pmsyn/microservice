@@ -1,0 +1,11 @@
+server:
+  port: 9099
+
+spring:
+  application:
+    name: api
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: micro
+    password: 123
+    url: localhost:1521:orcl

@@ -1,16 +1,17 @@
 <template>
     <div class="login-container">
         <div class="login-box">
-            <el-form :model="ruleForm" :rules="rules"  class="login-form">
+            <el-form ref="loginRef" :model="login" :rules="loginRules"  class="login-form">
                 <el-form-item><h1>登录</h1></el-form-item>
                 <el-form-item  prop="username">
-                    <el-input v-model="ruleForm.username" size="medium" prefix-icon="el-icon-user-solid" autofocus aria-placeholder="用户名"></el-input>
+                    <el-input v-model="login.username" size="medium" prefix-icon="el-icon-user-solid" autofocus aria-placeholder="用户名"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input v-model="ruleForm.password" size="medium" show-password prefix-icon="el-icon-lock" aria-placeholder="密码"></el-input>
+                    <el-input v-model="login.password" size="medium" show-password prefix-icon="el-icon-lock" aria-placeholder="密码"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                    <el-button type="primary" @click="submitForm('loginRef')">提交</el-button>
+                    <el-button type="primary" @click="resetForm('loginRef')">重置</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -22,11 +23,11 @@
         name: "Login",
         data(){
                 return{
-                    ruleForm:{
+                    login:{
                         username:'',
                         password:'',
                     },
-                    rules:{
+                    loginRules:{
                         username: [
                             {required: true, message: '请输入用户名', trigger: 'blur'}
                         ],
@@ -38,15 +39,26 @@
         },
         methods:{
             submitForm(formName){
-                this.$refs[formName].validate((valid) => {
+                this.$refs[formName].validate(async(valid) => {
                     if (valid) {
-                        alert('submit!');
+                        /**this.$message.success('submit');
+                        //await只能用在被async修饰的方法中
+                        let {data:result} =  await this.$http().post('login',this.login);
+                        this.$message.success.log(result);**/
+                        //登录成功后将token保存到sessionStorage中
+                        window.sessionStorage.setItem("token","1234");
+                        //跳转到home页面
+                        this.$router.push('/home');
+
                     } else {
-                        console.log('error submit!!');
+                        this.$message.error('error submit!!');
                         return false;
                     }
                 });
             },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            }
         }
     }
 </script>
