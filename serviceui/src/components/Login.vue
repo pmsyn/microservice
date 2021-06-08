@@ -41,10 +41,9 @@
             submitForm(formName){
                 this.$refs[formName].validate(async(valid) => {
                     if (valid) {
-                        /**this.$message.success('submit');
                         //await只能用在被async修饰的方法中
-                        let {data:result} =  await this.$http().post('login',this.login);
-                        this.$message.success.log(result);**/
+                        let {data:result} =  await this.$http().post('/login',this.login);
+                        this.$message.success(result);
                         //登录成功后将token保存到sessionStorage中
                         window.sessionStorage.setItem("token","1234");
                         //跳转到home页面

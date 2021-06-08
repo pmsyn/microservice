@@ -1,11 +1,13 @@
 server:
   port: 9099
+  servlet:
+    context-path: /api
 
 spring:
   application:
     name: api
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    username: micro
-    password: 123
-    url: localhost:1521:orcl
+    username: jrgis
+    password: jrealsoft
+    url: jdbc:oracle:thin:@192.168.31.173:1521:orcl
