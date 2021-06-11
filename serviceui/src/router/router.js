@@ -8,7 +8,8 @@ Vue.use(VueRouter)
 const routes = [
   {path:'/',redirect:'/login'},//重定向到login
   {path:'/login',component:Login},
-  {path:'/home',component:Home}
+  {path:'/home',component:Home},
+  {path: '*', redirect: '/error'},//404
 ]
 
 const router = new VueRouter({

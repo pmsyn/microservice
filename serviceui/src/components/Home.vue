@@ -5,35 +5,26 @@
         </el-header>
         <el-container>
             <el-aside >
-                <el-menu active-text-color="#03A9F4" unique-opened="true">
-                    <el-submenu index="1">
-                        <!--一级菜单-->
-                        <template slot="title">
-                            <i class="el-icon-location"></i>
-                            <span>导航一</span>
-                        </template>
-                        <!--二级菜单-->
-                        <el-menu-item index="1-1">选项1</el-menu-item>
-                        <el-menu-item index="1-2">选项2</el-menu-item>
-                        <el-menu-item index="1-3">选项3</el-menu-item>
-                        <!--三级菜单-->
-                        <el-submenu index="1-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="1-4-1">选项1</el-menu-item>
+                <el-menu active-text-color="#03A9F4"   >
+                    <div v-for="(item,index) in menutress" :key="index">
+                        <el-submenu v-if="item.children" :index="item.id+''" :key="item.id" >
+                            <!--一级菜单-->
+                            <template slot="title" >
+                                <i class="el-icon-location"></i>
+                                <span>{{item.name}}</span>
+                            </template>
+                            <!--二级菜单-->
+                            <el-menu-item :index="sub.id+''" v-for="sub in item.children" :key="sub.id">
+                                {{sub.name}}
+                            </el-menu-item>
+                            <!--三级菜单
+                            <el-submenu index="1-4">
+                                <template slot="title">选项4</template>
+                                <el-menu-item index="1-4-1">选项1</el-menu-item>
+                            </el-submenu>-->
                         </el-submenu>
-                    </el-submenu>
-                    <el-menu-item index="2">
-                        <i class="el-icon-menu"></i>
-                        <span slot="title">导航二</span>
-                    </el-menu-item>
-                    <el-menu-item index="3" >
-                        <i class="el-icon-document"></i>
-                        <span slot="title">导航三</span>
-                    </el-menu-item>
-                    <el-menu-item index="4">
-                        <i class="el-icon-setting"></i>
-                        <span slot="title">导航四</span>
-                    </el-menu-item>
+                        <el-menu-item :index="item.id+''" v-else>{{item.name}}</el-menu-item>
+                    </div>
                 </el-menu>
             </el-aside>
             <el-container>
@@ -47,6 +38,22 @@
 <script>
     export default {
         name: "Home",
+        data(){
+            return{
+                menutress:[
+                    {id:'1',name:'菜单1',children:[
+                            {id:'1-1',name:'菜单1-1'},
+                            {id:'1-2',name:'菜单1-2'},
+                        ]},
+                    {id:'2',name:'菜单2',children:[
+                            {id:'2-1',name:'菜单2-1'},
+                            {id:'2-2',name:'菜单2-2'},
+                        ]},
+                    {id:'3',name:'菜单3'}
+
+                ]
+            }
+        },
         methods:{
             logout(){
                 window.sessionStorage.clear()

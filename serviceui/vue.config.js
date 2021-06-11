@@ -4,7 +4,6 @@ module.exports = {
         host:'localhost',
         port:9098,
         open:true,//项目启动时自动在浏览器中打开
-        hotOnly:true,    // 是否热更新;
         proxy: {
             '/api': {//代理标识
                 target: 'http://localhost:9099',//后台服务目标地址,
