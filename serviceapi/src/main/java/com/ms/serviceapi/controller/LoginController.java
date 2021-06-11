@@ -1,5 +1,6 @@
 package com.ms.serviceapi.controller;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @RestController
 public class LoginController {
     @RequestMapping("/login")
-    public Map login(@RequestParam Map<String,Object> param){
+    public Map login(@RequestBody Map<String,Object> param){
         Map<String,Object> ret = new HashMap<>();
         String username = (String)param.get("username");
         String password = (String)param.get("password");

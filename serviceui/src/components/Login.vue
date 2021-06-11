@@ -39,15 +39,20 @@
         },
         methods:{
             submitForm(formName){
-                this.$refs[formName].validate(async(valid) => {
+                this.$refs[formName].validate(async (valid) => {
                     if (valid) {
                         //await只能用在被async修饰的方法中
-                        let {data:result} =  await this.$http().post('/login',this.login);
-                        this.$message.success(result);
-                        //登录成功后将token保存到sessionStorage中
-                        window.sessionStorage.setItem("token","1234");
-                        //跳转到home页面
-                        this.$router.push('/home');
+                        /*let {data:res} = await this.$http.post('login',this.login);
+                        console.log(res);*/
+                        this.$http.post('/login',this.login).then(res=>{
+                            console.log(res);
+                            //登录成功后将token保存到sessionStorage中
+                            window.sessionStorage.setItem("token",res.data.token);
+                            //跳转到home页面
+                            this.$router.push('/home');
+                        }).catch(error=>{
+                           console.log(error);
+                        });
 
                     } else {
                         this.$message.error('error submit!!');

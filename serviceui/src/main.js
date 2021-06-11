@@ -7,14 +7,15 @@ import store from './store'
 import './assets/global.css'
 
 //请求拦截器，在请求路径中加入Authoration参数
-axios.defaults.baseURL="http://localhost:9099/api"
 axios.interceptors.request.use(config => {
   config.headers.Authoration = window.sessionStorage.getItem("token");
+  config.baseURL='/api'
   return config;
 })
+Vue.prototype.$http = axios;
 
-Vue.prototype.$http = axios
 Vue.config.productionTip = false
+
 
 new Vue({
   router,
