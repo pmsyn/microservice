@@ -4,8 +4,11 @@
             <el-button type="info" @click="logout" size="mini">退出</el-button>
         </el-header>
         <el-container>
-            <el-aside >
-                <el-menu active-text-color="#03A9F4"   >
+            <el-aside :width="isCollapse?'65px':'300px'">
+                <div @click="collapseMenu" :class="isCollapse?'el-icon-s-unfold':'el-icon-s-fold'">
+                </div>
+                <el-menu active-text-color="#03A9F4"
+                         :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath">
                     <div v-for="(item,index) in menutress" :key="index">
                         <el-submenu v-if="item.children" :index="item.id+''" :key="item.id" >
                             <!--一级菜单-->
@@ -14,7 +17,7 @@
                                 <span>{{item.name}}</span>
                             </template>
                             <!--二级菜单-->
-                            <el-menu-item :index="sub.id+''" v-for="sub in item.children" :key="sub.id">
+                            <el-menu-item :index="'/'+sub.path" v-for="sub in item.children" :key="sub.id" @click="menuClick('/'+sub.path)">
                                 {{sub.name}}
                             </el-menu-item>
                             <!--三级菜单
@@ -28,7 +31,9 @@
                 </el-menu>
             </el-aside>
             <el-container>
-                <el-main >main</el-main>
+                <el-main >
+                    <router-view></router-view>
+                </el-main>
                 <el-footer >footer</el-footer>
             </el-container>
         </el-container>
@@ -41,8 +46,8 @@
         data(){
             return{
                 menutress:[
-                    {id:'1',name:'菜单1',children:[
-                            {id:'1-1',name:'菜单1-1'},
+                    {id:'1',name:'用户管理',children:[
+                            {id:'1-1',name:'用户列表',path:'userlist'},
                             {id:'1-2',name:'菜单1-2'},
                         ]},
                     {id:'2',name:'菜单2',children:[
@@ -51,19 +56,24 @@
                         ]},
                     {id:'3',name:'菜单3'}
 
-                ]
+                ],
+                isCollapse:false,
+                activePath:''
             }
+
+
+
         },
         methods:{
             logout(){
                 window.sessionStorage.clear()
                 this.$router.push("/login");
             },
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
+            collapseMenu(){
+                this.isCollapse = !this.isCollapse;
             },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
+            menuClick(path){
+                this.activePath = path;
             }
         }
     }
@@ -82,5 +92,8 @@
     }
     .el-footer{
         background-color: rgba(236, 231, 231, 0.96);
+    }
+    .el-submenu__title{
+        padding-left: 5px;
     }
 </style>

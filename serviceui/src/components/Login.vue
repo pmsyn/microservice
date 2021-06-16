@@ -39,7 +39,7 @@
         },
         methods:{
             submitForm(formName){
-                this.$refs[formName].validate(async (valid) => {
+                this.$refs[formName].validate((valid) => {
                     if (valid) {
                         //await只能用在被async修饰的方法中
                         /*let {data:res} = await this.$http.post('login',this.login);

@@ -10,4 +10,4 @@ spring:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     username: jrgis
     password: jrealsoft
-    url: jdbc:oracle:thin:@192.168.31.173:1521:orcl
+    url: jdbc:oracle:thin:@116.55.251.208:1251:dev
