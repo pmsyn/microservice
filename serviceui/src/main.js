@@ -1,12 +1,13 @@
 import Vue from 'vue'
+import App from './App.vue'
+import store from './store'
+import index from './router'
 import axios from 'axios'
 import './plugins/element'
-import App from './App.vue'
-import router from './router/router'
 import NProgress from 'nprogress'
-import store from './store'
-import './assets/global.css'
 import 'nprogress/nprogress.css'
+import './assets/global.css'
+import './assets/icon/iconfont/iconfont.css'
 
 //请求拦截器，在请求路径中加入Authoration参数
 axios.interceptors.request.use(config => {
@@ -25,7 +26,7 @@ Vue.config.productionTip = false
 
 
 new Vue({
-  router,
+  router: index,
   store,
   render: h => h(App)
 }).$mount('#app')

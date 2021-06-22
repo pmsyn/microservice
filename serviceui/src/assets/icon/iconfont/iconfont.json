@@ -1,0 +1,16 @@
+{
+  "id": "2625091",
+  "name": "demo",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2678663",
+      "name": "注销",
+      "font_class": "logout",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    }
+  ]
+}

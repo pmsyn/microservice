@@ -2,8 +2,7 @@
     <el-container>
 
             <el-aside :width="isCollapse?'65px':'300px'">
-                <div @click="collapseMenu" :class="isCollapse?'el-icon-s-unfold':'el-icon-s-fold'">
-                </div>
+
                 <el-menu active-text-color="#03A9F4"
                          :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath">
                     <div v-for="(item,index) in menuTress" :key="index">
@@ -28,8 +27,18 @@
                 </el-menu>
             </el-aside>
             <el-container class="main">
+
                 <el-header >
-                    <el-button type="info" @click="logout" size="mini">退出</el-button>
+                    <el-row>
+                        <el-col :span="12">
+                            <span @click="collapseMenu" :class="isCollapse?'el-icon-s-unfold':'el-icon-s-fold'"></span>
+                        </el-col>
+                        <el-col :span="12" >
+                            <el-tooltip class="item" content="注销" placement="bottom">
+                                <span type="info" @click="logout" size="mini" style="float: right;" class="iconfont icon-logout"></span>
+                            </el-tooltip>
+                            </el-col>
+                    </el-row>
                 </el-header>
                 <el-main >
                     <router-view></router-view>
@@ -79,8 +88,10 @@
 </script>
 
 <style   scoped>
-    .el-icon-s-fold,.el-icon-s-unfold{
+    .el-icon-s-fold,.el-icon-s-unfold,.icon-logout{
         cursor: pointer;
+        color: #fff;
+        font-size: 20px;
     }
     .el-container{
         height: 100%;
@@ -91,15 +102,12 @@
     .el-header{
         background-color: #03A9F4;
         padding: 5px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+    }
+    .el-row{
+        line-height: 35px;
     }
     .el-footer{
         background-color: rgba(236, 231, 231, 0.96);
-    }
-    .el-submenu__title{
-        padding-left: 5px;
     }
     .el-footer,.el-header {
         height: 45px !important;

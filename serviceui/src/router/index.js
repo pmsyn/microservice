@@ -19,7 +19,7 @@ const routes = [
   {path: '*', redirect: '/error'},//404
 ]
 
-const router = new VueRouter({
+const index = new VueRouter({
   routes
 })
 /**
@@ -30,7 +30,7 @@ const router = new VueRouter({
  *  next()表示放行 next('/login') 强制跳转到login页面
  */
 
-router.beforeEach((to,from,next)=>{
+index.beforeEach((to, from, next)=>{
   let token = window.sessionStorage.getItem("token");
   if(to.path == '/login'){
     if(token){
@@ -45,4 +45,4 @@ router.beforeEach((to,from,next)=>{
 });
 
 
-export default router
+export default index
