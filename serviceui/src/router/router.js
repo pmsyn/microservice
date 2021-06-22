@@ -13,7 +13,7 @@ const routes = [
   {path:'/home',component:Home,redirect: '/welcome',
     children:[
       {path:'/welcome',component:Welcome},
-      {path: '/userlist',component: UserList}
+      {path: '/UserList',component: UserList}
     ]
   },
   {path: '*', redirect: '/error'},//404
