@@ -16,11 +16,6 @@
                             <el-menu-item :index="'/'+sub.path" v-for="sub in item.children" :key="sub.id" @click="menuClick('/'+sub.path)">
                                 {{sub.name}}
                             </el-menu-item>
-                            <!--三级菜单
-                            <el-submenu index="1-4">
-                                <template slot="title">选项4</template>
-                                <el-menu-item index="1-4-1">选项1</el-menu-item>
-                            </el-submenu>-->
                         </el-submenu>
                         <el-menu-item :index="item.id+''" v-else>{{item.name}}</el-menu-item>
                     </div>
@@ -37,7 +32,7 @@
                             <el-tooltip class="item" content="注销" placement="bottom">
                                 <span type="info" @click="logout" size="mini" style="float: right;" class="iconfont icon-logout"></span>
                             </el-tooltip>
-                            </el-col>
+                        </el-col>
                     </el-row>
                 </el-header>
                 <el-main >
