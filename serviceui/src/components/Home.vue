@@ -1,6 +1,5 @@
 <template>
     <el-container>
-
             <el-aside :width="isCollapse?'65px':'300px'">
 
                 <el-menu active-text-color="#03A9F4"
