@@ -123,7 +123,7 @@ const Baz = () => import(/* webpackChunkName: "group-foo" */ './Baz.vue')
 ```
 webpackChunkName:将文件打包到此文件中
 ## 8. 通过node创建web服务器
-创建node项目，安装express,通过express创建web服务器，将vue打包生成的dist文件托管为静态资源
+### 1.创建node项目，安装express,通过express创建web服务器，将vue打包生成的dist文件托管为静态资源
 * 创建一个空的文件夹，作为web服务项目
 * 初始化这个项目 npm init -y 
 * 安装express
@@ -148,4 +148,46 @@ app.listen(80,()=>{
 * 运行
 ```shell script
 node ./app.js
+```
+### 2.开启gzip压缩
+使用express开启gzip压缩
+* 安装compression包
+```shell script
+npm i compression
+```
+* 导入包
+```javascript
+const compression = require('compression')
+```
+* 启用gzip，放到静态资源代码之前
+```javascript
+app.use(compression())
+```
+## 9.启用https服务
+### 1.申请ssl证书 http://freessl.cn
+### 2.导入证书
+```javascript
+const https = require('https');
+const fs = require('rs');
+const options={
+    cert:fs.readFileSync('./full_chain.pem'),//公钥
+    key:fs.readFileSync('./private.key')//私钥
+}
+https.createServer(options,app).listen(443)
+```
+## 10.使用pm2管理应用
+[PM2](https://www.npmjs.com/package/pm2) 是一个带有负载均衡功能的 Node 应用的进程管理器
+* 安装pm2
+```shell script
+npm i pm2 -g
+```
+* 启动项目应用
+```shell script
+pm2 start 脚本（app.js） --name 自定义名称
+#查看应用
+pm2 ls
+#重启
+pm2 restart 应用
+#停止应用
+pm2 stop 应用
 ```
