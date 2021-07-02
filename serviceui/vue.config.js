@@ -14,5 +14,31 @@ module.exports = {
                 }
             }
         }
+    },
+    //配置打包文件入口
+    chainWebpack:(config)=>{
+        //发布模式
+        config.when(process.env.NODE_ENV == 'production',config=>{
+            config.entry('app').clear().add('./src/main-prod.js')
+            //通过externals加载外部CDN资源,声明节点不会打包到文件中 k(包名):v（对象名）
+            config.set('externals',{
+                vue:'vue',
+                'vue-router':'VueRouter'
+            })
+            //自定义首页显示内容
+            config.plugin('html').tap(args => {
+                args[0].isProduction = true
+                return args
+            })
+        })
+        //开发模式
+        config.when(process.env.NODE_ENV == 'development',config=>{
+            config.entry('app').clear().add('./src/main-dev.js')
+            //自定义首页显示内容
+            config.plugin('html').tap(args => {
+                args[0].isProduction = false
+                return args
+            })
+        })
     }
 }

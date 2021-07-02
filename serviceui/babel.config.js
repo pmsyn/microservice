@@ -9,6 +9,8 @@ module.exports = {
   ],
   "plugins": [
       //...展开数组放到plugins中
-      ...productionPlugins
+      ...productionPlugins,
+      //路由懒加载
+      '@babel/plugin-syntax-dynamic-import'
   ]
 }
